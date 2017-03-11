@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# run the infosys program for all test sets
+#
+# produces the following result files:
+#
+#       out.N           standard output from test #N
+#       err.N           standard error output from test #N
+#
+
+n=1
+while [ -f input.$n ]
+do
+	echo "./infosys courses.$n students.$n < input.$n > out.$n 2> err.$n"
+	./infosys courses.$n students.$n < input.$n > out.$n 2> err.$n
+	cmp stdout.$n out.$n
+	cmp stderr.$n err.$n
+	n=`expr $n + 1`
+done

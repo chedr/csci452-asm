@@ -1,0 +1,51 @@
+Important files:
+
+	header.mak	for use with 'gmakemake > Makefile'
+
+	courses.*	sample course files
+	students.*	sample student files
+	input.*		sample standard input files
+
+	stdout.*	sample standard output files
+	stderr.*	sample standard error files
+
+	RUN		script to run infosys against the input files
+
+You can test your program with the RUN script found here, or with
+commands like these.  For Bourne shell and Bash users:
+
+	./infosys courses.1 students.1 < input.1 > out 2> err
+
+For C-shell users (note the use of parentheses):
+
+	(./infosys courses.1 students.1 < input.1 > out) >& err
+
+Each of these save the standard output  in a file named 'out' and
+the standard error output in a file named 'err'.  For each test, the
+RUN script also does a simple comparison of your output against the
+"correct" output:
+
+	cmp out stdout.1
+	cmp err stderr.1
+
+If the two files are identical, 'cmp' prints no output; otherwise, it
+will either tell you the location of the first byte that is different
+between the two files.
+
+If there is a difference between the two files you are comparing, you
+can go on to use the 'diff' command to display the differences:
+
+	diff out stdout.1
+
+If the differences aren't immediately apparent, look for the following
+things:  a mismatch in the number of whitespace characters within
+the text; extra whitespace characters at the end of the line (e.g.,
+a trailing space character); non-printing characters in your output
+(very common when working with strings - use 'cat -v' on the output file
+to see if there are any of these in your output).
+
+Any differences between your output and the test output should be
+corrected before submitting your program.
+
+NOTE:  These sets of test files test only some of the program's
+functionality!  Be sure to exhaustively test your solution.
